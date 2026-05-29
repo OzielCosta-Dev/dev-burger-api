@@ -1,0 +1,18 @@
+{
+  "name": "Dev Burger API",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+  },
+  "postCreateCommand": "corepack enable && pnpm install",
+  "postStartCommand": "docker compose up -d postgres",
+  "forwardPorts": [3001, 5432],
+  "portsAttributes": {
+    "3001": {
+      "label": "API"
+    },
+    "5432": {
+      "label": "Postgres"
+    }
+  }
+}
