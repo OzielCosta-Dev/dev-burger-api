@@ -2,13 +2,13 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-     await queryInterface.createTable('users', { 
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable('users', {
       id: {
         primaryKey: true,
         allowNull: false,
         type: Sequelize.UUID,
-        defaulValue: Sequelize.UUIDV4,
+        defaultValue: Sequelize.UUIDV4,
       },
       name: {
         type: Sequelize.STRING,
@@ -35,12 +35,9 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
-
-  });
-    
+    });
   },
-  async down (queryInterface) {
-     await queryInterface.dropTable('users');
-     
-  }
+  async down(queryInterface) {
+    await queryInterface.dropTable('users');
+  },
 };
