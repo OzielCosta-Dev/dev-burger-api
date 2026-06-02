@@ -1,33 +1,18 @@
 import { Router } from 'express';
-import User from './app/models/user.js';
+import ProductController from './app/controllers/ProductController.js';
+import SessionController from './app/controllers/SessionController.js';
+import UserController from './app/controllers/userController.js';
 
 const routes = new Router();
 
-routes.get('/', async (_req, res) => {
-  const [user, created] = await User.findOrCreate({
-    where: { email: 'oziel@email.com' },
-    defaults: {
-      name: 'Oziel',
-      password_hash: '123456',
-      admin: false,
-    },
-  });
-
-  res.status(created ? 201 : 200).json(user);
-});
-
-routes.post('/users', async (req, res) => {
-  try {
-    const user = await User.create(req.body);
-
-    return res.status(201).json(user);
-  } catch (error) {
-    if (error.name === 'SequelizeUniqueConstraintError') {
-      return res.status(409).json({ error: 'Email already exists' });
-    }
-
-    throw error;
-  }
-});
-
+// Métodos HTTP:
+/* 
+   POST -> Criar um registro
+   GET -> Listar registros
+   PUT -> Atualizar um registro
+   DELETE -> Deletar um registro
+*/
+routes.post('/users', UserController.store);
+routes.post('/session', SessionController.store);
+routes.post('/products', ProductController.store) 
 export default routes;
