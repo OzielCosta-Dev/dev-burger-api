@@ -2,6 +2,9 @@ import { Router } from 'express';
 import ProductController from './app/controllers/ProductController.js';
 import SessionController from './app/controllers/SessionController.js';
 import UserController from './app/controllers/userController.js';
+import multerConfig from './config/multer.cjs';
+import multer from 'multer';
+import authMiddleware from './middlewares/auth.js';
 
 const routes = new Router();
 
@@ -12,7 +15,19 @@ const routes = new Router();
    PUT -> Atualizar um registro
    DELETE -> Deletar um registro
 */
+
+const upload = multer(multerConfig)
+
 routes.post('/users', UserController.store);
+
+routes.use(authMiddleware)
 routes.post('/session', SessionController.store);
-routes.post('/products', ProductController.store) 
+routes.post('/products', upload.single('file'), ProductController.store);
+routes.get('/products', ProductController.index) 
+
+
+
+
+
+
 export default routes;
