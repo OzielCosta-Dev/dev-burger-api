@@ -10,7 +10,7 @@ class ProductController {
         const schema = Yup.object({
             name: Yup.string().required(),
             price: Yup.number().required(),
-            category: Yup.string().required(),
+            category_id: Yup.number().required(),
         })
 
         try {
@@ -19,13 +19,17 @@ class ProductController {
          return response.status(400).json({error: err.errors})
         }
         
-        const { name, price, category } = request.body
+        if (!request.file) {
+            return response.status(400).json({ error: 'Product image is required' })
+        }
+
+        const { name, price, category_id } = request.body
         const { filename } = request.file
 
         const newProduct = await Product.create({
             name,
             price,
-            category,
+            category_id,
             path: filename
         })
 
