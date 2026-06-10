@@ -8,6 +8,7 @@ app.use(express.json()); // Middleware to parse incoming JSON requests
 
 app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-encoded data (from forms)
 app.use('/product-file', fileRouteConfig) // Middleware to serve static files from the uploads directory when accessed via /product-file
+app.use('/category-file', fileRouteConfig) // Middleware to serve static files from the uploads directory when accessed via /product-file
 
 app.use(routes); // Using the imported routes in the Express application
 

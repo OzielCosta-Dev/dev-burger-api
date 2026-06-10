@@ -15,6 +15,7 @@ const authMiddleware = (request, response, next) => {
         const decoded = jwt.verify(token, authConfig.secret);
 
         request.userId = decoded.id;
+        request.userName = decoded.name;
         request.userIsAdmin = decoded.admin;
 
         return next();
