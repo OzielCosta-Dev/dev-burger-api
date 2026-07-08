@@ -8,6 +8,7 @@ import multer from 'multer';
 import authMiddleware from './app/middlewares/auth.js';
 import adminMiddleware from './app/middlewares/admin.js';
 import OrderController from './app/controllers/OrderController.js';
+import CreatePaymentIntentController from './app/controllers/stripe/CreatePaymentIntentController.js'
 
 const routes = new Router();
 
@@ -22,8 +23,8 @@ const routes = new Router();
 
 const upload = multer(multerConfig)
 
-routes.post('/users', UserController.store);
-routes.post('/sessions', SessionController.store);
+routes.post('/users', UserController.store); // Cadastro
+routes.post('/sessions', SessionController.store);  // Login
 
 routes.use(authMiddleware)
 
@@ -41,7 +42,7 @@ routes.put('/orders/:id', adminMiddleware, OrderController.update);
 
 
 
-
+routes.post("/create-payment-intent", CreatePaymentIntentController.store);
 
 
 export default routes;
