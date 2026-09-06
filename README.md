@@ -1,5 +1,5 @@
 # dev-burger-api
-#![Tests](https://github.com/OzielCosta-Dev/dev-burger-api/actions/workflows/tests.yml/badge.svg)
+![Tests](https://github.com/OzielCosta-Dev/dev-burger-api/actions/workflows/tests.yml/badge.svg)
 
 
 API para o projeto Dev Burger.
